@@ -30,6 +30,17 @@ export default async function Page(props: {
         return (
           <DocsPage toc={[]} full={page.data.full}>
             <DocsBody>
+              <div className="relative overflow-hidden rounded-md border">
+                <div className="pointer-events-none absolute inset-0 backdrop-blur-sm" />
+                <div className="p-6 sm:p-10">
+                  <div className="max-w-md">
+                    <h2 className="text-xl font-semibold">🔒 Sign in to view this page</h2>
+                    <p className="mt-2 text-sm text-fd-muted-foreground">
+                      This section is available to registered users. Complete sign-in to continue.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <ProtectedContentGate slug={params.slug?.join('/') || ''} />
             </DocsBody>
           </DocsPage>
@@ -37,10 +48,20 @@ export default async function Page(props: {
       }
     } catch (error) {
       console.error('Error checking session:', error);
-      // If there's an error checking the session, show the login screen
       return (
         <DocsPage toc={[]} full={page.data.full}>
           <DocsBody>
+            <div className="relative overflow-hidden rounded-md border">
+              <div className="pointer-events-none absolute inset-0 backdrop-blur-sm" />
+              <div className="p-6 sm:p-10">
+                <div className="max-w-md">
+                  <h2 className="text-xl font-semibold">🔒 Sign in to view this page</h2>
+                  <p className="mt-2 text-sm text-fd-muted-foreground">
+                    This section is available to registered users. Complete sign-in to continue.
+                  </p>
+                </div>
+              </div>
+            </div>
             <ProtectedContentGate slug={params.slug?.join('/') || ''} />
           </DocsBody>
         </DocsPage>
