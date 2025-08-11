@@ -8,13 +8,13 @@ export function ProtectedContentGate({ slug }: { slug: string }) {
 
   const handleSignIn = () => {
     clerk.openSignIn({
-      redirectUrl: `/docs/${slug}`,
+      redirectUrl: `/course/${slug}`,
     });
   };
 
   const handleSignUp = () => {
     clerk.openSignUp({
-      redirectUrl: `/docs/${slug}`,
+      redirectUrl: `/course/${slug}`,
     });
   };
 
