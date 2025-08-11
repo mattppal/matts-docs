@@ -8,7 +8,7 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 // Create base source
 export const source = loader({
-  baseUrl: '/docs',
+  baseUrl: '/',
   source: docs.toFumadocsSource(),
 });
 

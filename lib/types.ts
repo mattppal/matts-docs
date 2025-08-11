@@ -8,7 +8,7 @@ export type User = {
   fullName?: string | null;
   username?: string | null;
   emailAddress?: string | null;
-  imageUrl?: string;
+  imageUrl?: string; // Note: Use optimizeClerkImage() from lib/clerk-utils.ts for manual optimization
   createdAt?: Date;
 };
 

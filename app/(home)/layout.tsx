@@ -1,7 +1,22 @@
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
-import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { baseOptions } from '@/app/layout.config';
+import { createAuthAwarePageTree } from '@/lib/source';
 
-export default function Layout({ children }: { children: ReactNode }) {
-  return <HomeLayout {...baseOptions}>{children}</HomeLayout>;
+export const dynamic = 'force-dynamic';
+
+export default async function Layout({ children }: { children: ReactNode }) {
+  const pageTree = await createAuthAwarePageTree();
+  
+  return (
+    <DocsLayout 
+      tree={pageTree} 
+      {...baseOptions}
+      nav={{
+        ...baseOptions.nav,
+      }}
+    >
+      {children}
+    </DocsLayout>
+  );
 }

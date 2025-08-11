@@ -10,6 +10,7 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getMDXComponents } from '@/mdx-components';
 import { auth } from '@/lib/auth';
 import { ProtectedContentGate } from '@/components/protected-content-gate';
+import { ProtectedContentPlaceholder } from '@/components/protected-content-placeholder';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,40 +30,45 @@ export default async function Page(props: {
       if (!isAuthenticated) {
         return (
           <DocsPage toc={[]} full={page.data.full}>
+            <DocsTitle>{page.data.title}</DocsTitle>
+            <DocsDescription>{page.data.description}</DocsDescription>
             <DocsBody>
-              <div className="relative overflow-hidden rounded-md border">
-                <div className="pointer-events-none absolute inset-0 backdrop-blur-sm" />
-                <div className="p-6 sm:p-10">
-                  <div className="max-w-md">
-                    <h2 className="text-xl font-semibold">🔒 Sign in to view this page</h2>
-                    <p className="mt-2 text-sm text-fd-muted-foreground">
-                      This section is available to registered users. Complete sign-in to continue.
-                    </p>
+              <div className="relative">
+                <div className="blur-sm pointer-events-none select-none">
+                  <ProtectedContentPlaceholder />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-0% via-fd-background/20 via-40% to-fd-background to-80% flex items-center justify-center">
+                  <div className="bg-fd-card p-6 rounded-lg border shadow-lg max-w-sm text-center">
+                    <h3 className="text-lg font-semibold mb-2">🔒 Protected Content</h3>
+                    <p className="text-sm text-fd-muted-foreground mb-4">Sign in to view this page</p>
+                    <ProtectedContentGate slug={params.slug?.join('/') || ''} />
                   </div>
                 </div>
               </div>
-              <ProtectedContentGate slug={params.slug?.join('/') || ''} />
             </DocsBody>
           </DocsPage>
         );
       }
     } catch (error) {
       console.error('Error checking session:', error);
+      
       return (
         <DocsPage toc={[]} full={page.data.full}>
+          <DocsTitle>{page.data.title}</DocsTitle>
+          <DocsDescription>{page.data.description}</DocsDescription>
           <DocsBody>
-            <div className="relative overflow-hidden rounded-md border">
-              <div className="pointer-events-none absolute inset-0 backdrop-blur-sm" />
-              <div className="p-6 sm:p-10">
-                <div className="max-w-md">
-                  <h2 className="text-xl font-semibold">🔒 Sign in to view this page</h2>
-                  <p className="mt-2 text-sm text-fd-muted-foreground">
-                    This section is available to registered users. Complete sign-in to continue.
-                  </p>
+            <div className="relative">
+              <div className="blur-sm pointer-events-none select-none">
+                <ProtectedContentPlaceholder />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent from-0% via-fd-background/20 via-40% to-fd-background to-80% flex items-center justify-center">
+                <div className="bg-fd-card p-6 rounded-lg border shadow-lg max-w-sm text-center">
+                  <h3 className="text-lg font-semibold mb-2">🔒 Protected Content</h3>
+                  <p className="text-sm text-fd-muted-foreground mb-4">Sign in to view this page</p>
+                  <ProtectedContentGate slug={params.slug?.join('/') || ''} />
                 </div>
               </div>
             </div>
-            <ProtectedContentGate slug={params.slug?.join('/') || ''} />
           </DocsBody>
         </DocsPage>
       );
