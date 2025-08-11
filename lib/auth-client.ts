@@ -1,14 +1,38 @@
-import { createAuthClient } from "better-auth/react";
-import { organizationClient } from "better-auth/client/plugins";
-import { toast } from "sonner";
+import { useUser, useAuth, SignInButton, SignUpButton, UserButton, useClerk } from '@clerk/nextjs';
 
-export const authClient = createAuthClient({
-  plugins: [organizationClient()],
-  fetchOptions: {
-    onError: (ctx) => {
-      toast.error(ctx.error.message);
+// Re-export Clerk hooks and components for easier migration
+export { useUser, useAuth, SignInButton, SignUpButton, UserButton, useClerk };
+
+// Compatibility layer for better-auth migration
+export const authClient = {
+  signIn: {
+    email: () => {
+      throw new Error('Use Clerk SignInButton component instead');
+    },
+    social: () => {
+      throw new Error('Use Clerk SignInButton component instead');
     },
   },
-});
+  signUp: {
+    email: () => {
+      throw new Error('Use Clerk SignUpButton component instead');
+    },
+  },
+};
 
-export const { useSession, signOut } = authClient;
+// Legacy hook compatibility
+export function useSession() {
+  const { user, isLoaded } = useUser();
+  const { isSignedIn } = useAuth();
+  
+  return {
+    data: isSignedIn && user ? { user } : null,
+    isLoading: !isLoaded,
+  };
+}
+
+// Legacy signOut function
+export function signOut() {
+  const clerk = useClerk();
+  return clerk.signOut();
+}

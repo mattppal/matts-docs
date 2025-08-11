@@ -2,6 +2,17 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
+/* Protected page navigation styling */
+.protected-page {
+  opacity: 0.6 !important;
+  cursor: pointer !important;
+}
+
+.protected-page:hover {
+  opacity: 0.8 !important;
+  background-color: hsl(var(--muted)) !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

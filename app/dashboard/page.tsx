@@ -1,15 +1,16 @@
 "use client";
 
-import { useSession, signOut } from "@/lib/auth-client";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function Dashboard() {
-  const { data: session, isPending } = useSession();
+  const { user, isLoaded } = useUser();
+  const clerk = useClerk();
 
-  if (isPending) {
+  if (!isLoaded) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-lg">Loading...</div>
@@ -17,7 +18,7 @@ export default function Dashboard() {
     );
   }
 
-  if (!session) {
+  if (!user) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Card className="w-[400px]">
@@ -28,9 +29,9 @@ export default function Dashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/sign-in">
-              <Button className="w-full">Sign In</Button>
-            </Link>
+            <Button className="w-full" onClick={() => clerk.openSignIn({ redirectUrl: "/dashboard" })}>
+              Sign In
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -45,21 +46,21 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-4">
                 <Avatar className="h-16 w-16">
-                  <AvatarImage src={session.user.image || ""} alt={session.user.name} />
+                  <AvatarImage src={user.imageUrl} alt={user.fullName || ""} />
                   <AvatarFallback className="text-2xl">
-                    {session.user.name?.charAt(0).toUpperCase()}
+                    {user.firstName?.charAt(0).toUpperCase() || user.username?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">
-                    Welcome, {session.user.name}!
+                    Welcome, {user.fullName || user.username}!
                   </h1>
-                  <p className="text-gray-600">{session.user.email}</p>
+                  <p className="text-gray-600">{user.primaryEmailAddress?.emailAddress}</p>
                 </div>
               </div>
               <Button 
                 variant="outline" 
-                onClick={() => signOut()}
+                onClick={() => clerk.signOut()}
                 className="text-red-600 border-red-600 hover:bg-red-50"
               >
                 Sign Out
@@ -73,36 +74,37 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <div>
-                    <span className="font-semibold">Name:</span> {session.user.name}
+                    <span className="font-semibold">Name:</span> {user.fullName || user.username}
                   </div>
                   <div>
-                    <span className="font-semibold">Email:</span> {session.user.email}
+                    <span className="font-semibold">Email:</span> {user.primaryEmailAddress?.emailAddress}
                   </div>
                   <div>
                     <span className="font-semibold">Email Verified:</span>{" "}
-                    {session.user.emailVerified ? "✅ Yes" : "❌ No"}
+                    {user.primaryEmailAddress?.verification?.status === 'verified' ? "✅ Yes" : "❌ No"}
                   </div>
                   <div>
-                    <span className="font-semibold">User ID:</span> {session.user.id}
+                    <span className="font-semibold">User ID:</span> {user.id}
                   </div>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Session Information</CardTitle>
+                  <CardTitle>Profile Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <div>
-                    <span className="font-semibold">Session ID:</span> {session.session.id}
+                    <span className="font-semibold">First Name:</span> {user.firstName || "N/A"}
                   </div>
                   <div>
-                    <span className="font-semibold">Active Organization:</span>{" "}
-                    {session.session.activeOrganizationId || "Personal"}
+                    <span className="font-semibold">Last Name:</span> {user.lastName || "N/A"}
                   </div>
                   <div>
-                    <span className="font-semibold">IP Address:</span>{" "}
-                    {session.session.ipAddress || "N/A"}
+                    <span className="font-semibold">Username:</span> {user.username || "N/A"}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Created:</span> {user.createdAt?.toLocaleDateString() || "N/A"}
                   </div>
                 </CardContent>
               </Card>
@@ -121,8 +123,11 @@ export default function Dashboard() {
                     <Link href="/">
                       <Button variant="outline">Back to Home</Button>
                     </Link>
-                    <Button variant="outline" disabled>
-                      Settings (Coming Soon)
+                    <Button 
+                      variant="outline" 
+                      onClick={() => clerk.openUserProfile()}
+                    >
+                      Manage Profile
                     </Button>
                   </div>
                 </CardContent>
