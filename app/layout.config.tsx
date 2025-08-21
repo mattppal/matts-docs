@@ -9,20 +9,21 @@ import { AuthNav } from '@/components/auth-nav';
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-import { BookIcon } from 'lucide-react';
 export const baseOptions: BaseLayoutProps = {
+  links: [
+    {
+      type: 'custom',
+      children: <AuthNav />,
+      secondary: true,
+    }
+  ],
   nav: {
     title: (
       <>
         <Image src="/logo.png" alt="Logo" width={32} height={32} />
         Matt's Docs
       </>
-    ),
+    )
+
   },
-  // see https://fumadocs.dev/docs/ui/navigation/links
-  links: [{
-    type: 'custom',
-    children: <AuthNav />,
-    secondary: false,
-  }],
 };

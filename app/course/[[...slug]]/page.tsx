@@ -9,7 +9,7 @@ import { notFound } from 'next/navigation';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getMDXComponents } from '@/mdx-components';
 import { auth } from '@/lib/auth';
-import { ProtectedContentGate } from '@/components/protected-content-gate';
+import { ProtectedContentModal } from '@/components/protected-content-modal';
 import { ProtectedContentPlaceholder } from '@/components/protected-content-placeholder';
 
 export const dynamic = 'force-dynamic';
@@ -33,18 +33,7 @@ export default async function Page(props: {
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description}</DocsDescription>
             <DocsBody>
-              <div className="relative">
-                <div className="blur-lg pointer-events-none select-none">
-                  <ProtectedContentPlaceholder />
-                </div>
-                <div className="absolute inset-0 flex items-start justify-center pt-20">
-                  <div className="bg-fd-card p-6 rounded-lg border shadow-lg max-w-sm text-center">
-                    <h3 className="text-lg font-semibold mb-2">Login</h3>
-                    <p className="text-sm text-fd-muted-foreground mb-4">Sign in to view this page</p>
-                    <ProtectedContentGate slug={params.slug?.join('/') || ''} />
-                  </div>
-                </div>
-              </div>
+              <ProtectedContentModal slug={params.slug?.join('/') || ''} showBlur={true} />
             </DocsBody>
           </DocsPage>
         );
@@ -57,18 +46,7 @@ export default async function Page(props: {
           <DocsTitle>{page.data.title}</DocsTitle>
           <DocsDescription>{page.data.description}</DocsDescription>
           <DocsBody>
-            <div className="relative">
-              <div className="blur-sm pointer-events-none select-none">
-                <ProtectedContentPlaceholder />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent from-0% via-fd-background/20 via-40% to-fd-background to-80% flex items-start justify-center pt-20">
-                <div className="bg-fd-card p-6 rounded-lg border shadow-lg max-w-sm text-center">
-                  <h3 className="text-lg font-semibold mb-2">🔒 Protected Content</h3>
-                  <p className="text-sm text-fd-muted-foreground mb-4">Sign in to view this page</p>
-                  <ProtectedContentGate slug={params.slug?.join('/') || ''} />
-                </div>
-              </div>
-            </div>
+            <ProtectedContentModal slug={params.slug?.join('/') || ''} showBlur={false} />
           </DocsBody>
         </DocsPage>
       );
