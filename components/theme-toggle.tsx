@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 import { Moon, Sun, Airplay } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { type HTMLAttributes, useLayoutEffect, useState } from 'react';
-import { cn } from '../lib/cn';
+import { cn } from '@/lib/cn';
 
 const itemVariants = cva(
   'size-6.5 rounded-full p-1.5 text-fd-muted-foreground',

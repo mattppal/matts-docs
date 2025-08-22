@@ -228,7 +228,7 @@ export function DocsLayout({
             ))}
             {secondaryCustomLinks.map((item, i) => (
               <div key={`custom-${i}`}>
-                {item.children}
+                {item.type === 'custom' ? item.children : null}
               </div>
             ))}
             {themeSwitch.enabled !== false &&

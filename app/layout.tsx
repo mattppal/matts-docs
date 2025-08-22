@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <ClerkProvider>
       <html lang="en" className={inter.className} suppressHydrationWarning>
         <body className="flex flex-col min-h-screen">
-          <RootProvider>
+          <RootProvider theme={{ enabled: true }}>
             {children}
             <Toaster />
           </RootProvider>

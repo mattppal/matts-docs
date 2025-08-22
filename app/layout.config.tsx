@@ -10,6 +10,7 @@ import { AuthNav } from '@/components/auth-nav';
  * Docs Layout: app/docs/layout.tsx
  */
 export const baseOptions: BaseLayoutProps = {
+  // disableThemeSwitch: true,
   links: [
     {
       type: 'custom',
@@ -24,6 +25,5 @@ export const baseOptions: BaseLayoutProps = {
         Matt's Docs
       </>
     )
-
   },
 };
