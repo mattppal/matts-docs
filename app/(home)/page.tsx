@@ -6,7 +6,7 @@ import { useAuth, SignUpButton } from '@clerk/nextjs';
 export default function HomePage() {
   const { isSignedIn, isLoaded } = useAuth();
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 py-24">
+    <div className="flex flex-1 flex-col items-center justify-center px-6 py-24 bg-fd-background">
       <div className="mx-auto max-w-3xl text-center">
         {/* Hero Section */}
         <div className="mb-8">
@@ -32,7 +32,7 @@ export default function HomePage() {
             <>
               <Link
                 href="/course"
-                className="group inline-flex items-center gap-2 rounded-lg bg-fd-primary px-6 py-3 text-lg font-semibold text-fd-primary-foreground transition-all hover:bg-fd-primary/90 hover:scale-105"
+                className="group inline-flex items-center gap-2 rounded-lg bg-fd-primary/10 border border-fd-primary/20 px-6 py-3 text-lg font-semibold text-fd-primary transition-all hover:bg-fd-primary/15 hover:scale-105"
               >
                 View Documentation
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" />
@@ -48,7 +48,7 @@ export default function HomePage() {
             // Not signed in - simplified CTAs
             <>
               <SignUpButton mode="modal">
-                <button className="group inline-flex items-center gap-2 rounded-lg bg-fd-primary px-6 py-3 text-lg font-semibold text-fd-primary-foreground transition-all hover:bg-fd-primary/90 hover:scale-105">
+                <button className="group inline-flex items-center gap-2 rounded-lg bg-fd-primary/10 border border-fd-primary/20 px-6 py-3 text-lg font-semibold text-fd-primary transition-all hover:bg-fd-primary/15 hover:scale-105">
                   Sign Up Free
                   <ArrowRight className="size-5 transition-transform group-hover:translate-x-0.5" />
                 </button>
