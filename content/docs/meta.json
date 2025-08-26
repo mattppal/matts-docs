@@ -1,0 +1,12 @@
+{
+  "title": "Stripe Implementation for SaaS Apps",
+  "pages": [
+    "index",
+    "(Getting Started)",
+    "(Webhooks & Data)",
+    "(Implementation)",
+    "(Security & Control)",
+    "(Resources)"
+  ]
+}
+

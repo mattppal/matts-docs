@@ -1,0 +1,120 @@
+---
+title: 09. Frontend flow
+description: Keep UI simple by redirecting to the Portal for purchase and management.
+auth: true
+---
+
+This lesson reduces your UI to the essential: display synced state and redirect for actions.
+
+Here's where it gets satisfying: your frontend becomes ridiculously simple when you embrace the redirect pattern. 
+
+No complex state management, no payment form validation, no PCI compliance headaches. Just clean, predictable flows that work every time.
+
+## The Golden Rule: Redirect, Don't Build
+
+Instead of building custom payment forms, subscription management interfaces, or billing dashboards, your frontend follows one simple pattern:
+
+> **User wants to do something billing-related? → Redirect to Stripe.**
+
+This approach eliminates entire classes of bugs, security concerns, and maintenance overhead while providing users with Stripe's polished, battle-tested interfaces.
+
+## User Journey Walkthrough
+
+Let's trace through the complete user experience, building on the sequence diagrams from the previous section:
+
+### 1. New User Subscribes
+
+**What the user sees:**
+1. User clicks "Subscribe" or "Upgrade to Pro" in your app
+2. Your app immediately redirects them to Stripe's Customer Portal
+3. User selects a plan and completes payment in Stripe's interface
+4. User is redirected back to your app with a success message
+5. Your app shows their new subscription status (powered by webhook data)
+
+**Behind the scenes:** This triggers the "Subscription created" flow we saw earlier, where `customer.subscription.created` grants access.
+
+### 2. Existing Subscriber Manages Billing
+
+**What the user sees:**
+1. User clicks "Manage Billing" or "Change Plan" 
+2. Your app redirects them to Stripe's Customer Portal
+3. User updates payment method, changes plan, or cancels
+4. User returns to your app to see updated status
+
+**Behind the scenes:** This triggers the "Plan change" or "Subscription cancelled" flows, with webhooks keeping your app in sync.
+
+## Implementation Strategy
+
+### Frontend Components You Build
+
+```javascript
+// Simple subscription status display
+function SubscriptionStatus({ user }) {
+  if (!user.subscription_status) {
+    return <UpgradeButton />;
+  }
+  
+  return (
+    <div>
+      <p>Plan: {user.current_plan}</p>
+      <p>Status: {user.subscription_status}</p>
+      <p>Next billing: {user.current_period_end}</p>
+      <ManageBillingButton />
+    </div>
+  );
+}
+
+// All billing actions redirect to Stripe
+function ManageBillingButton() {
+  const handleClick = () => {
+    // Create portal session and redirect
+    window.location.href = '/api/create-portal-session';
+  };
+  
+  return <button onClick={handleClick}>Manage Billing</button>;
+}
+```
+
+### What You DON'T Build
+
+❌ **Payment forms** - Stripe Checkout handles this  
+❌ **Plan selection UI** - Configure in Customer Portal  
+❌ **Payment method management** - Customer Portal  
+❌ **Invoice history** - Customer Portal  
+❌ **Cancellation flows** - Customer Portal  
+❌ **Retry payment UI** - Customer Portal  
+
+### State Management
+
+Your frontend state is refreshingly simple:
+
+```javascript
+// All billing state comes from webhook-synced database
+const user = {
+  subscription_status: 'active',     // From webhooks
+  current_plan: 'pro',               // From webhooks  
+  current_period_end: '2024-02-01',  // From webhooks
+  stripe_customer_id: 'cus_...'      // From webhooks
+};
+
+// No complex billing state management needed!
+```
+
+## The Result: Bulletproof Simplicity
+
+This approach delivers:
+
+- **Security**: No sensitive payment data in your app
+- **Reliability**: Stripe's proven payment infrastructure  
+- **Consistency**: All billing interactions use the same polished interface
+- **Maintainability**: Minimal billing code to maintain
+- **User Experience**: Professional, familiar billing flows
+
+Your frontend becomes a thin layer that displays webhook-synced data and redirects to Stripe for actions. Simple, secure, and scalable.
+
+
+
+
+---
+
+Next: tie entitlements to state changes for deterministic access control.

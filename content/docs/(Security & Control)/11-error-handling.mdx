@@ -1,0 +1,21 @@
+---
+title: 11. Error handling
+description: Async handlers, signature verification, and idempotency for reliability.
+auth: true
+---
+
+This lesson makes your pipeline resilient: verify, dedupe, and process asynchronously.
+
+Async handlers and signature verification ensure security and reliability. Idempotency protects against duplicates and replays, keeping your database consistent.
+
+- Return 200 from webhook endpoints immediately; process asynchronously.
+- Verify webhook signatures.
+- Use `stripe_event_id` for idempotency/deduplication.
+- Guard against replays and out-of-order delivery using `processed` and created timestamps.
+
+
+
+
+---
+
+You now have a complete mental model and implementation path for a Stripe‑first subscription system.

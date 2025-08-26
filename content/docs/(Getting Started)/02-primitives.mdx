@@ -1,0 +1,35 @@
+---
+title: 02. Checkout primitives
+description: Learn Stripe core objects to keep your model minimal and safe.
+auth: true
+---
+
+This lesson sets the vocabulary: the minimal set of Stripe objects you'll use everywhere in this course.
+
+Understanding Stripe's object model is like learning the API before you code with it. Get this right and everything else clicks into place. 
+
+Think of it as the schema for your payment system—know these primitives and your AI assistant will write much better integration code.
+
+## Intro: Stripe Checkout primitives
+
+| Primitive        | What it is / How we use it |
+|------------------|-----------------------------|
+| Stripe Checkout  | Hosted payment page. Create a Checkout Session (`mode=subscription`); in Basil, the subscription is created after successful payment. Never collect card details yourself. |
+| Stripe Products  | Catalog entries for what you sell. Each Product has one or more `Price` objects (amount, currency, interval) used by Checkout and Subscriptions. Reference `price` IDs when creating Checkout Sessions. |
+| Stripe Webhook   | Signed event delivery to your HTTPS endpoint. Verify signatures, persist every event (use `stripe_event_id` for idempotency), and process asynchronously to mirror Stripe state. |
+| Data Storage     | Minimum tables: `users` (link `stripe_customer_id`, `stripe_subscription_id`, `subscription_status`, `current_period_end`) and `subscription_events` (store raw event, `stripe_event_id`, `processed`). Only trust webhook‑synced values for UI and access. |
+| Customer Portal  | Hosted billing management for PM updates, plan changes, cancellations. If a user already has an active subscription, redirect to Portal instead of Checkout. |
+
+Other core objects referenced in this doc:
+
+- **Customer**: Billing identity in Stripe; link to your user on `checkout.session.completed`.
+- **Subscription**: Access contract created post‑payment; enforce access from latest webhook‑synced `status` and dates.
+- **Invoice**: Renewal/payment artifact; handle `invoice.payment_succeeded` and `invoice.payment_failed` to maintain/limit access.
+- **Session objects**: Checkout Session (purchase) and Billing Portal Session (manage billing); both return redirect URLs.
+
+
+
+
+---
+
+Next: assemble these primitives into a clean, pre‑check flow for Checkout.

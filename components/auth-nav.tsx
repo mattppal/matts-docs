@@ -3,11 +3,18 @@
 import { UserButton, SignInButton } from '@clerk/nextjs';
 import { useAuth } from '@clerk/nextjs';
 import { LogIn } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function AuthNav() {
   const { isSignedIn, isLoaded } = useAuth();
+  const [mounted, setMounted] = useState(false);
 
-  if (!isLoaded) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch by showing loading state until mounted
+  if (!mounted || !isLoaded) {
     return (
       <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-fd-muted-foreground">
         <div className="size-4 animate-pulse bg-fd-muted rounded" />

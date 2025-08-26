@@ -1,0 +1,38 @@
+---
+title: 06. Event processing
+description: Persist-first, async processing, and idempotency for a reliable webhook pipeline.
+auth: true
+---
+
+This lesson turns events into reliable state using a persist‑first, async pipeline with idempotency.
+
+Persist-first, async processing, and idempotency make your webhook pipeline reliable. This prevents duplicates, handles retries gracefully, and keeps access rules consistent.
+
+> Note: In API version "Basil", subscriptions are created after payment. Treat `checkout.session.completed` as the link event, and `customer.subscription.created` as the grant-access event.
+
+| Incoming event                | Core checks                                   | Updates in DB                                                                                                      | Access action                                                          |
+|-------------------------------|-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| customer.created              | Verify signature; dedupe by `stripe_event_id` | If user mapping known, store `stripe_customer_id` and metadata; otherwise persist minimal record and await link    | None                                                                   |
+| customer.updated              | N/A                                           | Sync email, address, `invoice_settings.default_payment_method`, tax info                                           | None                                                                   |
+| customer.deleted              | N/A                                           | Remove/soft-delete customer and related records                                                                    | Revoke access                                                          |
+| checkout.session.completed    | Verify signature; dedupe by `stripe_event_id` | Link user ↔ `stripe_customer_id`; store `checkout_session_id`                                                      | None                                                                   |
+| customer.subscription.created | Ensure linked `stripe_customer_id` exists     | Set `stripe_subscription_id`, `subscription_status`, `current_period_end`, items/prices                            | Grant access                                                           |
+| customer.subscription.updated | Compare prior vs new `status`, dates, items   | Sync `status`, `cancel_at`, `canceled_at`, `pause_collection`, `current_period_end`, items, `billing_cycle_anchor` | Maintain if `active`; limit if `past_due/unpaid`; revoke if `canceled` |
+| customer.subscription.paused  | Validate `pause_collection`                   | Persist pause metadata                                                                                             | Limit/suspend access                                                   |
+| customer.subscription.resumed | Validate new `status`                         | Sync `status`, `current_period_end`                                                                                | Restore if `status=active`                                             |
+| customer.subscription.deleted | N/A                                           | Clear/archive subscription fields; set `subscription_status=canceled`                                              | Revoke access                                                          |
+| invoice.payment_succeeded     | Ensure matches current subscription           | Update `subscription_status=active`, refresh `current_period_end`, store invoice id/url/amount                     | Maintain access                                                        |
+| invoice.payment_failed        | N/A                                           | Set `subscription_status=past_due`                                                                                 | Limit/revoke and notify with Portal link                               |
+
+Processing rules
+
+1) Persist every event to `subscription_events` first; reject duplicates by `stripe_event_id`.
+2) Process asynchronously; return 200 immediately from the webhook endpoint.
+3) Mark the `subscription_events.processed=true` only after successful handler completion.
+
+
+
+
+---
+
+Next: visualize the flows to cement the mental model.

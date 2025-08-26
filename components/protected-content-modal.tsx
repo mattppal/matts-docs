@@ -23,11 +23,11 @@ export function ProtectedContentModal({ slug }: ProtectedContentModalProps) {
               </div>
               
               <h2 className="text-2xl font-bold text-fd-foreground">
-                Howdy partner
+                Howdy partner!
               </h2>
               
               <p className="text-fd-muted-foreground leading-relaxed">
-                Please sign in to continue reading (it's free!)
+                Please sign in or create an account to continue reading (it's free!)
               </p>
             </div>
 

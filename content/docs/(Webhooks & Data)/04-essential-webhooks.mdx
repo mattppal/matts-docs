@@ -1,0 +1,32 @@
+---
+title: 04. Essential webhook events
+description: Persist and process key Stripe events to mirror subscription state.
+auth: true
+---
+
+This lesson defines the events that power your access model and how to react to them consistently.
+
+These webhook events are your source of truth—they tell you exactly when to grant, maintain, or revoke access. 
+
+The async processing pattern here is chef's kiss: persist first, process later. Your system stays consistent even when Stripe sends events out of order (which it will).
+
+| Category     | Event                         | Purpose                                                               | Primary action                                                                                                       |
+|--------------|-------------------------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Customer     | customer.created              | New Stripe customer created                                           | Store `stripe_customer_id`, persist metadata                                                                         |
+| Customer     | customer.updated              | Customer details changed                                              | Sync email, address, `invoice_settings.default_payment_method`, tax info                                             |
+| Customer     | customer.deleted              | Customer deleted                                                      | Remove/soft-delete related customer data and subscriptions                                                           |
+| Checkout     | checkout.session.completed    | Checkout finished; subscription will be created after payment (Basil) | Link app user ↔ `stripe_customer_id`; store `checkout_session_id`                                                    |
+| Subscription | customer.subscription.created | Subscription created post-payment                                     | Provision access; persist `stripe_subscription_id`, `status`, `current_period_end`, items/prices                     |
+| Subscription | customer.subscription.updated | Status/plan/quantity/date changes                                     | Sync `status`, `cancel_at`, `canceled_at`, `pause_collection`, `current_period_end`, items, `billing_cycle_anchor` |
+| Subscription | customer.subscription.paused  | Subscription paused                                                   | Limit or suspend access per policy                                                                                   |
+| Subscription | customer.subscription.resumed | Subscription resumed                                                  | Restore access if `status` becomes `active`                                                                          |
+| Subscription | customer.subscription.deleted | Subscription ended                                                    | Revoke access; archive subscription fields                                                                           |
+| Invoices     | invoice.payment_succeeded     | Successful renewal/first invoice                                      | Maintain access; refresh `current_period_end`; store invoice id/url/amount                                           |
+| Invoices     | invoice.payment_failed        | Payment failed                                                        | Set `past_due`; notify with Customer Portal link                                                                     |
+
+
+
+
+---
+
+Next: design a minimal schema to persist and audit those events.

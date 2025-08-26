@@ -1,0 +1,37 @@
+---
+title: 05. Database schema
+description: Minimal tables to support access control and auditing with webhooks as source of truth.
+auth: true
+---
+
+In this lesson, you'll create the smallest useful schema to mirror Stripe state and audit every change.
+
+Minimal tables keep your system simple. Store only what you need for access control and auditing, and treat webhooks as the source of truth.
+
+<Mermaid
+  chart="
+erDiagram
+  USERS {
+    string id
+    string stripe_customer_id
+    string stripe_subscription_id
+    enum subscription_status
+    timestamp current_period_end
+  }
+  SUBSCRIPTION_EVENTS {
+    string stripe_event_id
+    string event_type
+    json event_data
+    string user_id
+    boolean processed
+  }
+
+  USERS ||--o{ SUBSCRIPTION_EVENTS : has"
+/>
+
+
+
+
+---
+
+Next: implement a persist‑first, async pipeline to process those events.

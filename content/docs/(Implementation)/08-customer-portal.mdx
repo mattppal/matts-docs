@@ -1,0 +1,23 @@
+---
+title: 08. Customer portal
+description: Use the Billing Portal for all billing management and primary redirects.
+auth: true
+---
+
+In this lesson, you'll lean on Stripe's Customer Portal to remove entire classes of custom billing UI.
+
+The Portal consolidates PM updates, plan changes, and cancellations, removing custom billing UIs and reducing support while ensuring Stripe remains the source of truth.
+
+- Create Portal Sessions for billing management.
+- Configure Portal to allow payment method updates and plan changes.
+- **Primary redirect**: If user already has an active subscription, send them to Portal instead of Checkout.
+- Replace custom billing UI with Portal links.
+- Set `return_url` back to your app.
+- Handle upgrades/downgrades through Portal; reflect changes via webhooks.
+
+
+
+
+---
+
+Next: translate these flows into a simple, predictable frontend.

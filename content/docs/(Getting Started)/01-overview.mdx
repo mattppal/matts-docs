@@ -1,0 +1,32 @@
+---
+title: 01. Overview
+description: Set principles to offload payments UI to Stripe and align with Basil behavior.
+---
+
+In this lesson, you'll establish the mental model for Stripe‑first billing and clarify responsibilities between Stripe and your app.
+
+Here's the mental model that'll save you months of debugging: **let Stripe handle the complex stuff, you handle the business logic**. 
+
+We're building on Basil's "subscription created after payment" behavior—which means less edge cases and cleaner state management.
+
+- **API version**: `2025-07-30.basil`
+- **Principle**: Use Stripe Checkout for all payments, Customer Portal for all billing. Sync state via webhooks. Our goal is to offload all payments logic and UI to Stripe.
+- **Key Basil change**: Subscriptions are created after payment completes (not during Checkout Session creation).
+
+### Responsibilities
+
+| Area               | Stripe                             | Your app                                                       |
+|--------------------|------------------------------------|----------------------------------------------------------------|
+| Payments & PCI     | Payment processing, PCI compliance | None (do not build custom forms)                               |
+| Subscriptions      | Create/update/cancel, dunning      | Mirror status in DB; enforce access                            |
+| Checkout           | Hosted Checkout Session            | Redirect users; pre-check active subs                          |
+| Billing management | Customer Portal                    | Generate Portal sessions; redirect for PM updates/plan changes |
+| Payment retries    | Managed by Stripe                  | Surface actions via Portal; no custom retry logic              |
+| Data sync          | Webhooks                           | Persist events; keep `users` and `subscription_events` in sync |
+
+
+
+
+---
+
+Next: learn the core primitives that everything else builds on.

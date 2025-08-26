@@ -1,0 +1,8 @@
+{
+  "title": "Getting Started",
+  "pages": [
+    "01-overview",
+    "02-primitives", 
+    "03-checkout-sessions"
+  ]
+}

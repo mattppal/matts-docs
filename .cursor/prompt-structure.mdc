@@ -1,0 +1,450 @@
+---
+alwaysApply: true
+---
+
+# XML Prompting Structure
+
+<introduction>
+XML structuring techniques for clear, effective prompts. For brand voice, see [`personal-brand.md`](personal-brand.md). For grammar standards, see [`grammar.md`](grammar.md).
+</introduction>
+
+<core_principles>
+<semantic_containers>Treat XML tags as semantic containers that define content role and context</semantic_containers>
+<tag_hierarchy>Nested tags create parent-child relationships providing additional context</tag_hierarchy>
+<explicit_reference>Reference tagged content using exact tag names: "based on `<dataset>` tags"</explicit_reference>
+<consistent_structure>Maintain naming and nesting consistency throughout responses</consistent_structure>
+</core_principles>
+
+<essential_tag_patterns>
+<instructions>Primary directive, takes precedence over other guidance
+```xml
+<instructions>
+1. Analyze data
+2. Generate recommendations
+3. Format as bullet points
+</instructions>
+```
+</instructions>
+
+<context>Situational context, role definitions, audience
+```xml
+<context>
+You are Matt Palmer, educating aspiring developers about AI-assisted development.
+Target audience: Beginners seeking accessible AI tools.
+</context>
+```
+</context>
+
+<examples>Patterns and formats to follow
+```xml
+<examples>
+<example type="beginner">Show accessible AI tool entry points</example>
+<example type="experienced">Demonstrate efficiency paradigms</example>
+</examples>
+```
+</examples>
+
+<output_format>Exact formatting requirements
+```xml
+<output_format>
+Use <summary>, <details>, <recommendations> tags.
+Apply casual voice mode for social media.
+</output_format>
+```
+</output_format>
+</essential_tag_patterns>
+
+<advanced_patterns>
+<conditional>
+```xml
+<if condition="technical_audience">Include implementation details</if>
+<if condition="beginner_audience">Focus on conceptual explanations</if>
+```
+</conditional>
+
+<hierarchical>
+```xml
+<content_type id="tutorial">
+<difficulty level="beginner">
+<step number="1">Set up development environment</step>
+</difficulty>
+</content_type>
+```
+</hierarchical>
+
+<multi_step_reasoning>
+```xml
+<thinking>Show step-by-step reasoning process</thinking>
+<answer>Provide final structured response</answer>
+```
+</multi_step_reasoning>
+</advanced_patterns>
+
+<brand_aligned_templates>
+<educational_content>
+```xml
+<context>
+You are Matt Palmer, making [topic] accessible through evidence-based education.
+Target: [beginners/experienced/entrepreneurs/learners]
+</context>
+
+<instructions>
+1. Simplify complex concepts
+2. Provide actionable tips
+3. Ground in research/proven principles
+4. Use [formal/casual/authentic] voice mode
+5. Include community elements
+</instructions>
+
+<style>
+Apply voice characteristics from personal-brand.md
+Follow grammar standards from grammar.md
+</style>
+```
+</educational_content>
+
+<vibe_coding_content>
+```xml
+<context>
+Focus on "vibe coding": intuitive, AI-assisted development making coding accessible and secure
+</context>
+
+<instructions>
+1. Emphasize practical AI techniques
+2. Include security-by-default
+3. Make accessible to all levels
+4. Provide immediate value
+5. Foster inclusive engagement
+</instructions>
+
+<voice_mode>[formal/casual/authentic] based on platform</voice_mode>
+```
+</vibe_coding_content>
+</brand_aligned_templates>
+
+<practical_examples>
+<data_analysis>
+```xml
+<context>Analyzing SaaS customer feedback</context>
+<data>[Customer feedback dataset]</data>
+<instructions>
+1. Identify top 3 issues
+2. Suggest solutions
+3. Prioritize by impact/effort
+</instructions>
+<output_format>Use <analysis>, <recommendations>, <priorities> tags</output_format>
+```
+
+**Response:**
+```xml
+<analysis>
+1. Slow loading (45% of feedback)
+2. Confusing navigation (32%)
+3. Limited mobile functionality (28%)
+</analysis>
+<recommendations>
+1. Optimize queries/implement caching
+2. Redesign navigation with user testing
+3. Develop responsive mobile interface
+</recommendations>
+<priorities>
+High: Loading times (high impact, medium effort)
+Medium: Navigation (medium impact, high effort)
+Low: Mobile (medium impact, high effort)
+</priorities>
+```
+</data_analysis>
+
+<casual_tutorial>
+```xml
+<context>Creating Twitter thread about AI app building</context>
+<voice_mode>casual</voice_mode>
+<instructions>
+1. Use lowercase styling
+2. Include relatable language
+3. Show quick wins
+4. Encourage community sharing
+</instructions>
+```
+
+**Response:**
+```
+just built my first ai app in 20 mins using cursor 🤯
+
+no cs degree needed. literally just described what i wanted and watched it come to life.
+
+this is what "vibe coding" is about → focusing on problems, not syntax.
+
+who else is building with ai? drop your creations below 👇
+```
+</casual_tutorial>
+</practical_examples>
+
+<best_practices>
+<prompt_creation>
+- Survey entire structure before responding
+- Identify primary `<instructions>` or `<task>` tags
+- Check for `<output_format>` specifications
+- Understand nested context hierarchy
+- Apply appropriate voice mode from personal-brand.md
+</prompt_creation>
+
+<response_generation>
+- Use requested tags consistently
+- Don't over-nest unnecessarily
+- Maintain clear, semantic tag names
+- Ensure all tags properly close
+- Validate structure before finalizing
+</response_generation>
+</best_practices>
+
+<common_mistakes>
+<structural_errors>
+- Treating nested content as independent
+- Mixing tagged/untagged content inconsistently
+- Using different names for same concept
+- Forgetting to close tags properly
+- Over-interpreting tag meanings
+</structural_errors>
+</common_mistakes>
+
+<naming_conventions>
+<principle>Use descriptive, intuitive names that make prompt structure immediately clear</principle>
+<good_examples>`<instructions>` not `<inst>`, `<background_context>` not `<bg>`, `<financial_data>` not `<data1>`</good_examples>
+</naming_conventions>
+
+<voice_mode_integration>
+<formal_mode>Technical precision, complete structure, professional terminology</formal_mode>
+<casual_mode>Relaxed structure, lowercase acceptable, strategic abbreviations</casual_mode>
+<authentic_mode>Mix formal/casual based on message, maintain clarity while being conversational</authentic_mode>
+</voice_mode_integration>
+
+<quick_reference>
+**Essential Tags:** `<context>`, `<instructions>`, `<examples>`, `<output_format>`
+**Voice Integration:** Apply personal-brand.md voice modes within XML structure
+**Grammar Application:** Follow grammar.md standards within tag content
+**Best Practice:** Survey → Identify → Structure → Apply → Validate
+</quick_reference>
+# XML Prompting Structure
+
+<introduction>
+XML structuring techniques for clear, effective prompts. For brand voice, see [`personal-brand.md`](personal-brand.md). For grammar standards, see [`grammar.md`](grammar.md).
+</introduction>
+
+<core_principles>
+<semantic_containers>Treat XML tags as semantic containers that define content role and context</semantic_containers>
+<tag_hierarchy>Nested tags create parent-child relationships providing additional context</tag_hierarchy>
+<explicit_reference>Reference tagged content using exact tag names: "based on `<dataset>` tags"</explicit_reference>
+<consistent_structure>Maintain naming and nesting consistency throughout responses</consistent_structure>
+</core_principles>
+
+<essential_tag_patterns>
+<instructions>Primary directive, takes precedence over other guidance
+```xml
+<instructions>
+1. Analyze data
+2. Generate recommendations
+3. Format as bullet points
+</instructions>
+```
+</instructions>
+
+<context>Situational context, role definitions, audience
+```xml
+<context>
+You are Matt Palmer, educating aspiring developers about AI-assisted development.
+Target audience: Beginners seeking accessible AI tools.
+</context>
+```
+</context>
+
+<examples>Patterns and formats to follow
+```xml
+<examples>
+<example type="beginner">Show accessible AI tool entry points</example>
+<example type="experienced">Demonstrate efficiency paradigms</example>
+</examples>
+```
+</examples>
+
+<output_format>Exact formatting requirements
+```xml
+<output_format>
+Use <summary>, <details>, <recommendations> tags.
+Apply casual voice mode for social media.
+</output_format>
+```
+</output_format>
+</essential_tag_patterns>
+
+<advanced_patterns>
+<conditional>
+```xml
+<if condition="technical_audience">Include implementation details</if>
+<if condition="beginner_audience">Focus on conceptual explanations</if>
+```
+</conditional>
+
+<hierarchical>
+```xml
+<content_type id="tutorial">
+<difficulty level="beginner">
+<step number="1">Set up development environment</step>
+</difficulty>
+</content_type>
+```
+</hierarchical>
+
+<multi_step_reasoning>
+```xml
+<thinking>Show step-by-step reasoning process</thinking>
+<answer>Provide final structured response</answer>
+```
+</multi_step_reasoning>
+</advanced_patterns>
+
+<brand_aligned_templates>
+<educational_content>
+```xml
+<context>
+You are Matt Palmer, making [topic] accessible through evidence-based education.
+Target: [beginners/experienced/entrepreneurs/learners]
+</context>
+
+<instructions>
+1. Simplify complex concepts
+2. Provide actionable tips
+3. Ground in research/proven principles
+4. Use [formal/casual/authentic] voice mode
+5. Include community elements
+</instructions>
+
+<style>
+Apply voice characteristics from personal-brand.md
+Follow grammar standards from grammar.md
+</style>
+```
+</educational_content>
+
+<vibe_coding_content>
+```xml
+<context>
+Focus on "vibe coding": intuitive, AI-assisted development making coding accessible and secure
+</context>
+
+<instructions>
+1. Emphasize practical AI techniques
+2. Include security-by-default
+3. Make accessible to all levels
+4. Provide immediate value
+5. Foster inclusive engagement
+</instructions>
+
+<voice_mode>[formal/casual/authentic] based on platform</voice_mode>
+```
+</vibe_coding_content>
+</brand_aligned_templates>
+
+<practical_examples>
+<data_analysis>
+```xml
+<context>Analyzing SaaS customer feedback</context>
+<data>[Customer feedback dataset]</data>
+<instructions>
+1. Identify top 3 issues
+2. Suggest solutions
+3. Prioritize by impact/effort
+</instructions>
+<output_format>Use <analysis>, <recommendations>, <priorities> tags</output_format>
+```
+
+**Response:**
+```xml
+<analysis>
+1. Slow loading (45% of feedback)
+2. Confusing navigation (32%)
+3. Limited mobile functionality (28%)
+</analysis>
+<recommendations>
+1. Optimize queries/implement caching
+2. Redesign navigation with user testing
+3. Develop responsive mobile interface
+</recommendations>
+<priorities>
+High: Loading times (high impact, medium effort)
+Medium: Navigation (medium impact, high effort)
+Low: Mobile (medium impact, high effort)
+</priorities>
+```
+</data_analysis>
+
+<casual_tutorial>
+```xml
+<context>Creating Twitter thread about AI app building</context>
+<voice_mode>casual</voice_mode>
+<instructions>
+1. Use lowercase styling
+2. Include relatable language
+3. Show quick wins
+4. Encourage community sharing
+</instructions>
+```
+
+**Response:**
+```
+just built my first ai app in 20 mins using cursor 🤯
+
+no cs degree needed. literally just described what i wanted and watched it come to life.
+
+this is what "vibe coding" is about → focusing on problems, not syntax.
+
+who else is building with ai? drop your creations below 👇
+```
+</casual_tutorial>
+</practical_examples>
+
+<best_practices>
+<prompt_creation>
+- Survey entire structure before responding
+- Identify primary `<instructions>` or `<task>` tags
+- Check for `<output_format>` specifications
+- Understand nested context hierarchy
+- Apply appropriate voice mode from personal-brand.md
+</prompt_creation>
+
+<response_generation>
+- Use requested tags consistently
+- Don't over-nest unnecessarily
+- Maintain clear, semantic tag names
+- Ensure all tags properly close
+- Validate structure before finalizing
+</response_generation>
+</best_practices>
+
+<common_mistakes>
+<structural_errors>
+- Treating nested content as independent
+- Mixing tagged/untagged content inconsistently
+- Using different names for same concept
+- Forgetting to close tags properly
+- Over-interpreting tag meanings
+</structural_errors>
+</common_mistakes>
+
+<naming_conventions>
+<principle>Use descriptive, intuitive names that make prompt structure immediately clear</principle>
+<good_examples>`<instructions>` not `<inst>`, `<background_context>` not `<bg>`, `<financial_data>` not `<data1>`</good_examples>
+</naming_conventions>
+
+<voice_mode_integration>
+<formal_mode>Technical precision, complete structure, professional terminology</formal_mode>
+<casual_mode>Relaxed structure, lowercase acceptable, strategic abbreviations</casual_mode>
+<authentic_mode>Mix formal/casual based on message, maintain clarity while being conversational</authentic_mode>
+</voice_mode_integration>
+
+<quick_reference>
+**Essential Tags:** `<context>`, `<instructions>`, `<examples>`, `<output_format>`
+**Voice Integration:** Apply personal-brand.md voice modes within XML structure
+**Grammar Application:** Follow grammar.md standards within tag content
+**Best Practice:** Survey → Identify → Structure → Apply → Validate
+</quick_reference>

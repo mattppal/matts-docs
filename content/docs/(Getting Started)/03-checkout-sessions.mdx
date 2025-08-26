@@ -1,0 +1,25 @@
+---
+title: 03. Checkout sessions
+description: Use hosted Checkout and pre-check existing subscriptions before creating a session.
+auth: true
+---
+
+In this lesson, you'll wire the primitives into a user‑friendly flow that avoids duplicate subscriptions and keeps billing logic out of your app.
+
+Using hosted Checkout avoids PCI scope, standardizes subscription creation, and the pre-check prevents sending active subscribers back to Checkout—redirect them to the Customer Portal instead.
+
+One subscription per customer.
+
+- **Always** redirect to Stripe Checkout. Never build custom payment forms.
+- Set `customer_creation: 'always'`.
+- Use `mode: 'subscription'` for subscriptions.
+- **Pre-check** before creating checkout:
+  - If user has an active subscription -> redirect to Customer Portal.
+  - If no active subscription -> create a new Checkout Session.
+
+
+
+
+---
+
+Next: capture the essential events that drive access.

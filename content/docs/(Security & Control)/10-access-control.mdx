@@ -1,0 +1,24 @@
+---
+title: 10. Access control
+description: Tie access to webhook-synced subscription state for deterministic entitlements.
+auth: true
+---
+
+This lesson locks your product behavior to Stripe‑synced state so entitlements are deterministic.
+
+Tie access strictly to webhook-synced subscription state. This keeps entitlement logic deterministic and robust to retries or out-of-order events.
+
+| Trigger  | Condition                                                         | Access effect                       | Notes                            |
+|----------|-------------------------------------------------------------------|-------------------------------------|----------------------------------|
+| Grant    | `customer.subscription.created`                                   | Enable subscriber features          | Primary grant event post-payment |
+| Maintain | `subscription_status=active`                                      | Keep access                         | Reflects latest webhook state    |
+| Limit    | `subscription_status in (past_due, unpaid)`                       | Restricted access (e.g., read-only) | Encourage PM update via Portal   |
+| Revoke   | `customer.subscription.deleted` or `subscription_status=canceled` | Disable access                      | End of service window            |
+| Revoke   | `invoice.payment_failed` (no recovery)                            | Disable access                      | If you choose strict policy      |
+
+
+
+
+---
+
+Next: harden your pipeline with error handling and idempotency.

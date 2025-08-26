@@ -1,7 +1,6 @@
-# matts-docs
+# Stripe mini-masterclass
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+A comprehensive tutorial series for mastering Stripe Checkout and subscription billing. Built with Next.js and [Fumadocs](https://github.com/fuma-nama/fumadocs).
 
 Run development server:
 

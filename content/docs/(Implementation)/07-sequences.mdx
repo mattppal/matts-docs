@@ -1,0 +1,71 @@
+---
+title: 07. Sequence diagrams
+description: Visualize key flows to clarify where access changes happen.
+auth: true
+---
+
+This lesson helps you internalize where access actually changes by mapping the core flows.
+
+Visualizing flows clarifies where access changes happen (e.g., grant on `customer.subscription.created`) and reinforces that billing actions happen in the Portal.
+
+### Subscription created
+
+<Mermaid
+  chart="
+sequenceDiagram
+  participant U as User
+  participant A as App
+  participant S as Stripe
+
+  U->>A: Open Customer Portal
+  A->>S: Create Portal Session
+  S->>A: webhook customer.subscription.created
+  A->>A: Activate subscription and set current_period_end"
+/>
+
+### Plan change
+
+<Mermaid
+  chart="
+sequenceDiagram
+  participant U as User
+  participant A as App
+  participant S as Stripe
+
+  U->>A: Change plan in Portal
+  S->>A: webhook customer.subscription.updated
+  A->>A: Sync price and current_period_end"
+/>
+
+### Subscription cancelled
+
+<Mermaid
+  chart="
+sequenceDiagram
+  participant U as User
+  participant A as App
+  participant S as Stripe
+
+  U->>A: Cancel in Portal
+  S->>A: webhook customer.subscription.deleted
+  A->>A: Set status canceled and revoke access"
+/>
+
+### Subscription end
+
+<Mermaid
+  chart="
+sequenceDiagram
+  participant S as Stripe
+  participant A as App
+
+  S->>A: webhook customer.subscription.deleted (end of term)
+  A->>A: Revoke access"
+/>
+
+
+
+
+---
+
+Next: apply the Portal‑first approach to simplify billing UX.
