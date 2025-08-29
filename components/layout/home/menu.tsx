@@ -18,10 +18,10 @@ const menuItemVariants = cva('', {
       main: 'inline-flex items-center gap-2 py-1.5 transition-colors hover:text-fd-popover-foreground/50 data-[active=true]:font-medium data-[active=true]:text-fd-primary [&_svg]:size-4',
       icon: buttonVariants({
         size: 'icon',
-        color: 'ghost',
+        variant: 'ghost',
       }),
       button: buttonVariants({
-        color: 'secondary',
+        variant: 'secondary',
         className: 'gap-1.5 [&_svg]:size-4',
       }),
     },

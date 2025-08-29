@@ -50,7 +50,7 @@ export function RootToggle({
   }, [options, pathname]);
 
   const onClick = () => {
-    closeOnRedirect.current = false;
+    // closeOnRedirect is a read-only ref from the sidebar context; do not mutate.
     setOpen(false);
   };
 

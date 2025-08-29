@@ -151,7 +151,7 @@ export function Header({
             className={cn(
               buttonVariants({
                 size: 'icon',
-                color: 'ghost',
+                variant: 'ghost',
                 className: 'group',
               }),
             )}
