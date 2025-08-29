@@ -130,3 +130,16 @@
     /* @apply bg-background text-foreground; */
   }
 }
+
+/* Frosted glass top nav */
+#nd-subnav {
+  background-color: color-mix(in oklch, var(--background) 64%, transparent);
+  -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  backdrop-filter: saturate(1.2) blur(12px);
+  border-bottom-color: color-mix(in oklch, var(--border) 70%, transparent);
+}
+
+.dark #nd-subnav {
+  background-color: color-mix(in oklch, var(--background) 52%, transparent);
+  border-bottom-color: color-mix(in oklch, var(--border) 50%, transparent);
+}

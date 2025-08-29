@@ -69,7 +69,7 @@ export function DocsLayout({
     ...sidebarProps
   } = {},
   searchToggle = {},
-  disableThemeSwitch = false,
+  disableThemeSwitch = true,
   themeSwitch = { enabled: !disableThemeSwitch },
   i18n = false,
   children,

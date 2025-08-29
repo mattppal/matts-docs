@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import { ClerkProvider } from '@clerk/nextjs';
 
+
 const inter = Inter({
   subsets: ['latin'],
 });
@@ -32,7 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <ClerkProvider>
       <html lang="en" className={inter.className} suppressHydrationWarning>
         <body className="flex flex-col min-h-screen">
-          <RootProvider theme={{ enabled: true }}>
+          <RootProvider theme={{ enabled: true, forcedTheme: 'dark' }}>
             {children}
             <Toaster />
           </RootProvider>
