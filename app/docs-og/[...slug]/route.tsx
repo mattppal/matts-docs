@@ -1,5 +1,6 @@
-import * as fs from 'node:fs/promises';
-import { generateOGImage } from '@/app/docs-og/[...slug]/og';
+// import * as fs from 'node:fs/promises';
+// import { generateOGImage } from '@/app/docs-og/[...slug]/og';
+import { generateOGImage } from 'fumadocs-ui/og';
 import { source } from '@/lib/source';
 import { notFound } from 'next/navigation';
 import { getFonts } from "@/lib/load-google-font";

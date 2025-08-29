@@ -39,7 +39,7 @@ export function generate({
         width: '100%',
         height: '100%',
         color: 'white',
-        backgroundImage: `url(/public/hero-impressionist.png)`,
+        
       }}
     >
       <div
