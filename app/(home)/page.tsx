@@ -7,10 +7,14 @@ import emojiData from 'react-apple-emojis/src/data.json';
 import { ArrowRight } from 'lucide-react';
 import { useAuth, SignUpButton } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
+import { notFound } from 'next/navigation';
+import { source } from '@/lib/source';
+
 
 export default function HomePage() {
   const { isSignedIn, isLoaded } = useAuth();
   const [mounted, setMounted] = useState(false);
+  
 
   useEffect(() => {
     setMounted(true);
@@ -39,7 +43,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <div className="mb-6 md:mb-8">
           <h1 className="mb-6 text-7xl font-bold tracking-tight text-fd-foreground sm:text-6xl lg:text-7xl">
-            Stripe mini-masterclass
+            stripe saas mini-masterclass
           </h1>
           <p className="mx-auto max-w-2xl text-xl leading-8 text-fd-muted-foreground">
             Ship subscription billing that actually works. 11 focused lessons designed for 

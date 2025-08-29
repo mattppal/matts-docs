@@ -11,19 +11,19 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'Stripe mini-masterclass',
+  title: 'stripe saas mini-masterclass',
   description: 'Systems-focused deep dive into subscription billing that actually works. For developers who understand good architecture and build with AI tools.',
   keywords: 'Stripe, Checkout, Subscriptions, Webhooks, Payment Processing, Systems Architecture, AI Development',
   authors: [{ name: 'Matt' }],
   creator: 'Matt',
   openGraph: {
-    title: 'Stripe mini-masterclass',
+    title: 'stripe saas mini-masterclass',
     description: 'Systems-focused deep dive into subscription billing that actually works',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Stripe mini-masterclass',
+    title: 'stripe saas mini-masterclass',
     description: 'Systems-focused deep dive into subscription billing that actually works',
   },
 };

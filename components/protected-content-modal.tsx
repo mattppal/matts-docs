@@ -10,6 +10,7 @@ interface ProtectedContentModalProps {
 
 export function ProtectedContentModal({ slug }: ProtectedContentModalProps) {
     return (
+      
       <div className="relative">
         <div className="blur-lg pointer-events-none select-none">
           <ProtectedContentPlaceholder />

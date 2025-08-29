@@ -1,4 +1,4 @@
-# Stripe mini-masterclass
+# stripe saas mini-masterclass
 
 A comprehensive tutorial series for mastering Stripe Checkout and subscription billing. Built with Next.js and [Fumadocs](https://github.com/fuma-nama/fumadocs).
 

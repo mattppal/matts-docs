@@ -22,7 +22,7 @@ export const baseOptions: BaseLayoutProps = {
     title: (
       <>
         <Image src="/logo.png" alt="Logo" width={32} height={32} />
-        Stripe mini-masterclass
+        stripe saas mini-masterclass
       </>
     )
   },
